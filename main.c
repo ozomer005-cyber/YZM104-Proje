@@ -1,37 +1,47 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <allegro5/allegro.h>
+#include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_font.h>
+
+// Kart yapisi iskeleti hazirlandi
+typedef struct {
+    int id;
+    int durum; 
+} Kart;
 
 int main() {
-    // 1. Allegro'yu başlatıyoruz. Başarısız olursa programı durduruyoruz.
-    if (!al_init()) {
-        printf("Hata: Allegro baslatilamadi!\n");
-        return -1;
-    }
+    char oyuncuAdSoyad[100];
 
-    // 2. Pencereyi (Display) temsil edecek bir pointer oluşturuyoruz.
-    ALLEGRO_DISPLAY *ekran = al_create_display(800, 600);
-    
-    // Pencere oluşturulabildi mi diye kontrol ediyoruz.
-    if (!ekran) {
-        printf("Hata: Pencere olusturulamadi!\n");
-        return -1;
-    }
+    printf("--- HAFIZA KARTI OYUNUNA HOS GELDINIZ ---\n");
+    printf("Lutfen adinizi ve soyadinizi girin: ");
+    scanf(" %[^\n]", oyuncuAdSoyad);
+    printf("\nBasarilar %s! Oyun basliyor...\n", oyuncuAdSoyad);
 
-    // 3. Pencerenin başlığını ayarlayalım
+    al_init();
+    al_install_mouse();
+    al_init_primitives_addon();
+    al_init_font_addon();
+
+    ALLEGRO_DISPLAY *ekran = al_create_display(600, 600);
     al_set_window_title(ekran, "Hafiza Karti Oyunu - YZM104");
 
-    // 4. Arka planı belirli bir renge (örneğin koyu gri) boyuyoruz.
-    // RGB renk kodları kullanıyoruz: R:50, G:50, B:50
-    al_clear_to_color(al_map_rgb(50, 50, 50));
+    ALLEGRO_EVENT_QUEUE *kuyruk = al_create_event_queue();
+    al_register_event_source(kuyruk, al_get_display_event_source(ekran));
 
-    // 5. Yaptığımız çizimlerin/boyamaların ekrana yansıması için buffer'ı çeviriyoruz.
-    al_flip_display();
+    bool calisiyor = true;
+    while (calisiyor) {
+        al_clear_to_color(al_map_rgb(40, 40, 40)); 
+        al_flip_display();
 
-    // 6. Pencerenin hemen kapanmaması için 5 saniye (5.0) bekletiyoruz.
-    al_rest(5.0);
+        ALLEGRO_EVENT event;
+        al_wait_for_event(kuyruk, &event);
+        if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+            calisiyor = false;
+        } 
+    }
 
-    // 7. Hafıza sızıntısı (memory leak) olmaması için oluşturduğumuz ekranı yok ediyoruz.
     al_destroy_display(ekran);
-
+    al_destroy_event_queue(kuyruk);
     return 0;
 }

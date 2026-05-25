@@ -10,4 +10,4 @@ run: all
 	./$(HEDEF)
 
 clean:
-	rm -f $(HEDEF)
+	rm -f $(HEDEF) 
