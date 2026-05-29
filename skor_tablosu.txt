@@ -1,4 +1,8 @@
-
-Oyuncu: omer oz | Hamle Sayisi: 16
+Oyuncu: omer oz | Sure: 4 sn | Hamle Sayisi: 0
+Oyuncu: omer oz | Sure: 10 sn | Hamle Sayisi: 5
+Oyuncu: omer oz | Sure: 21 sn | Hamle Sayisi: 13
 Oyuncu: omer oz | Sure: 23 sn | Hamle Sayisi: 14
 Oyuncu: omer oz | Sure: 26 sn | Hamle Sayisi: 16
+Oyuncu: omer oz | Sure: 28 sn | Hamle Sayisi: 16
+Oyuncu: omer oz | Sure: 29 sn | Hamle Sayisi: 17
+Oyuncu: omer oz | Sure: 41 sn | Hamle Sayisi: 23
